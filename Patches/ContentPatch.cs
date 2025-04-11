@@ -180,11 +180,15 @@ internal class ContentPatch
                     string shortTexName = material.mainTexture.name.ToLower();
                     string longTexName = gameObject.name.Replace("(Clone)", "").Trim().ToLower() + "_" +
                                                               material.mainTexture.name.ToLower();
+                    string longRendTexName = gameObject.name.Replace("(Clone)", "").Trim().ToLower() + "_" +
+                                            renderer.name.Trim().ToLower() + "_" +
+                                          material.mainTexture.name.ToLower();
 
                     if (ResourceOverridesTextures.ContainsKey(shortTexName) ||
-                        ResourceOverridesTextures.ContainsKey(longTexName))
+                        ResourceOverridesTextures.ContainsKey(longTexName) ||
+                        ResourceOverridesTextures.ContainsKey(longRendTexName))
                     {
-                        string texName = (ResourceOverridesTextures.ContainsKey(shortTexName)) ? shortTexName: longTexName;
+                        string texName = (ResourceOverridesTextures.ContainsKey(shortTexName)) ? shortTexName : ((ResourceOverridesTextures.ContainsKey(longTexName)) ? longTexName : longRendTexName);
                         Texture2D tex = GetHighestPriorityTextureOverride(texName);
                         if ((material.mainTexture.width != tex.width ||
                             material.mainTexture.height != tex.height) &&
