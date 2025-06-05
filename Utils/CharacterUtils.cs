@@ -24,6 +24,15 @@ public class CharacterUtils
         {
             SaveAsBackup(id);
 
+            if (Characters.star == id)
+            {
+                Characters.star = 1;
+            }
+            else if (Characters.star > id)
+            {
+                Characters.star--;
+            }
+
             if (Characters.wrestler == id)
             {
                 Characters.wrestler = 1;
