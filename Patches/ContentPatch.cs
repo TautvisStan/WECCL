@@ -249,6 +249,28 @@ internal class ContentPatch
         }
     }
 
+    /*
+ * Patch:
+ * - Overrides the textures of the game with overrides for RawImage loaded at runtime.
+ */
+    [HarmonyPatch(typeof(RawImage), nameof(UnityEngine.UI.RawImage.OnPopulateMesh))]
+    [HarmonyPostfix]
+    public static void RawImage(ref RawImage __instance)
+    {
+
+        if (__instance.m_Texture != null && ResourceOverridesTextures.ContainsKey(__instance.m_Texture.name.ToLower()))
+        {
+            Texture2D overrideTexture = GetHighestPriorityTextureOverride(__instance.m_Texture.name.ToLower());
+            if ((__instance.m_Texture.width != overrideTexture.width || __instance.m_Texture.height != overrideTexture.height) && !Plugin.UseFullQualityTextures.Value)
+            {
+                overrideTexture = ResizeTexture(overrideTexture, __instance.m_Texture.width, __instance.m_Texture.height);
+                SetHighestPriorityTextureOverride(__instance.m_Texture.name.ToLower(), overrideTexture);
+            }
+
+            __instance.m_Texture = overrideTexture;
+        }
+    }
+
     internal static int temp = -1;
 
     /*
