@@ -1,5 +1,12 @@
 # Changelog
 
+### Release 1.14.1
+- Support for nested texture and RawImage overrides.
+- Auto display newly created character on the search list.
+- Added null check for custom promo surprise entrants.
+- Fixed star character shifting when deleting characters.
+- The exception screen now shows a random phrase instead of "Bummer" on the continue button.
+
 ### Release 1.14.0
 - Fixed `SetFace` and `SetHeel` promo commands taking two arguments instead of one.
 - Fixed `GameObject_texture.png` files not applying correctly.
