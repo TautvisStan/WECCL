@@ -393,7 +393,7 @@ internal class PromoPatch
         }
         __instance.NELODEMHJHN = 0;  //seat
         __instance.PCNHIIPBNEK[0].SetActive(false);
-        __instance.IFOCOECLBAF.SetActive(false);
+        __instance.IFOCOECLBAF?.SetActive(false);
     }
     public static void RespawnTogetherWith(UnmappedPlayer manager, UnmappedPlayer wrestler)
     {
@@ -405,7 +405,7 @@ internal class PromoPatch
         manager.EKOHAKPAOGN = wrestler.EKOHAKPAOGN;
         manager.FNNBCDPJBIO = wrestler.FNNBCDPJBIO;
         manager.PCNHIIPBNEK[0].SetActive(false);
-        manager.IFOCOECLBAF.SetActive(false);
+        manager.IFOCOECLBAF?.SetActive(false);
 
     }
 

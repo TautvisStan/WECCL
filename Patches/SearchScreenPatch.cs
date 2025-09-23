@@ -310,8 +310,8 @@ internal class SearchScreenPatch
                 MappedSound.Play(MappedSound.death[3]);
                 LogInfo("Deleting wrestler " + Characters.c[Characters.foc].name);
                 CharacterUtils.DeleteCharacter(Characters.foc);
-                Characters.foc--;
-                MappedMenus.foc--;
+                int foc = MappedMenus.foc-1 < 1 ? 1 : MappedMenus.foc - 1;
+                
                 for (int m = 1; m <= MappedPlayers.no_plays; m++)
                 {
                     if (Characters.profileChar[m] > 0)
@@ -321,6 +321,9 @@ internal class SearchScreenPatch
                 }
                 MappedSaveSystem.request = 1;
                 MappedMenus.Load();
+                MappedMenus.foc = foc;
+                Characters.foc = 0;
+
             }
         }
         // New
@@ -328,9 +331,11 @@ internal class SearchScreenPatch
         {
             MappedSound.Play(MappedSound.tanoy);
             LogInfo("Creating new wrestler");
-            CharacterUtils.CreateRandomCharacter();
+            int charID = CharacterUtils.CreateRandomCharacter();
             MappedSaveSystem.request = 1;
             MappedMenus.Load();
+            MappedMenus.foc = Array.IndexOf(MappedMenus.rank, charID);
+            Characters.foc = 0;
         }
     }
 

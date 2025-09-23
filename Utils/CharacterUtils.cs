@@ -24,6 +24,15 @@ public class CharacterUtils
         {
             SaveAsBackup(id);
 
+            if (Characters.star == id)
+            {
+                Characters.star = 1;
+            }
+            else if (Characters.star > id)
+            {
+                Characters.star--;
+            }
+
             if (Characters.wrestler == id)
             {
                 Characters.wrestler = 1;
@@ -296,7 +305,7 @@ public class CharacterUtils
         }
     }
 
-    public static void CreateRandomCharacter()
+    public static int CreateRandomCharacter()
     {
         try
         {
@@ -327,6 +336,8 @@ public class CharacterUtils
             ((MappedCharacter)Characters.c[Characters.no_chars]).Trade(9);
             ((MappedCharacter)Characters.c[Characters.no_chars]).teamName = "";
             CharacterEvents.InvokeAfterCharacterAdded(Characters.no_chars, Characters.c[Characters.no_chars]);
+            LogInfo($"New character created: {((MappedCharacter)Characters.c[Characters.no_chars]).name}");
+            return Characters.no_chars;
         }
         catch (Exception e)
         {
